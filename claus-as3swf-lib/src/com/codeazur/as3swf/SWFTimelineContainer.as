@@ -111,7 +111,7 @@ package com.codeazur.as3swf
 		public function parseTags(data:SWFData, version:uint):void {
 			var tag:ITag;
 			parseTagsInit(data, version);
-			while ((tag = parseTag(data)) && tag.type != TagEnd.TYPE) {};
+			while (Boolean(tag = parseTag(data)) && tag.type != TagEnd.TYPE) {};
 			parseTagsFinalize();
 		}
 		
@@ -130,7 +130,7 @@ package com.codeazur.as3swf
 		protected function parseTagsAsyncInternal():void {
 			var tag:ITag;
 			var time:int = getTimer();
-			while ((tag = parseTag(_tmpData, true)) && tag.type != TagEnd.TYPE) {
+			while (Boolean(tag = parseTag(_tmpData, true)) && tag.type != TagEnd.TYPE) {
 				if((getTimer() - time) > TIMEOUT) {
 					enterFrameProvider.addEventListener(Event.ENTER_FRAME, parseTagsAsyncHandler);
 					return;

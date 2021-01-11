@@ -17,12 +17,10 @@ package fox
 
 	public class SwfBuilder
 	{
-		public static const FONT_CLASS_NAME_PERFIX:String="FONT";
+		public static const FONT_CLASS_NAME_PREFIX:String="FONT";
 		private static var MAGIC_BYTE_HEX:String='10002e0000000011074c4955484f4e470039493a5c70353433313635343132335c78685f70686f746f5c666f6e74636f6e766572746f72546573745c7372633b3b4c4955484f4e472e61730568656c6c6f3348692074686572652c206e69636520746f206d65657420796f752120476c616420796f752063616e2072656164206d65203a290f4c4955484f4e472f4c4955484f4e470a666c6173682e7465787404466f6e74064f626a6563741c5f5f676f5f746f5f63746f725f646566696e6974696f6e5f68656c700466696c6538493a5c70353433313635343132335c78685f70686f746f5c666f6e74636f6e766572746f72546573745c7372635c4c4955484f4e472e617303706f73023939175f5f676f5f746f5f646566696e6974696f6e5f68656c70023535050501160216071801000407020107030807020903000002000000060000000200020a020b0d0c0e0f020b0d0c10010102090400010000000102010144010002000103000101040503d030470000010102050619f103f007d030ef0104000af009d049002c05f00a85d5f00b470000020201010421d030f103f00565005d036603305d026602305d02660258001d1d6801f103f003470000';
 
-		public function SwfBuilder()
-		{
-		}
+		public static var fontCount:int;
 
 		protected function hex2bytes(str:String):ByteArray
 		{
@@ -67,10 +65,8 @@ package fox
 			return hex2bytes(magic);
 		}
 
-
-		public function builderFontSwf(tags:Array):ByteArray
+		public function buildFontSwf(tags:Array):ByteArray
 		{
-
 			var frameName:String="LHW1987654@GMAIL.COM";
 
 			var swfTemp:SWF=new SWF();
@@ -94,12 +90,14 @@ package fox
 				fongtag.publish(fontdata, 10);
 				fontdata.position=0;
 				
-				var name:String=i.toString();
+				var name:String=(fontCount++ + i).toString();
 				while (name.length < 3)
 				{
 					name="0" + name;
 				}
-				name=FONT_CLASS_NAME_PERFIX + name;
+				name=FONT_CLASS_NAME_PREFIX + name;
+
+				trace("adding font", name);
 
 				//abc
 				var abc:TagDoABC=new TagDoABC();

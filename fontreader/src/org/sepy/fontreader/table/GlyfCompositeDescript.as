@@ -3,8 +3,6 @@ package org.sepy.fontreader.table
 	import flash.errors.IOError;
 	import flash.utils.ByteArray;
 	
-	import mx.collections.ArrayCollection;
-	
 	public class GlyfCompositeDescript extends GlyfDescript
 	{
 		private var _components:Array = new Array();		// GlyfCompositeComp ( ArrayList<GlyfCompositeComp> )
