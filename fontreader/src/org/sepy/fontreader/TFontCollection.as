@@ -24,16 +24,15 @@ package org.sepy.fontreader
 	import flash.events.IEventDispatcher;
 	import flash.net.URLStream;
 	import flash.utils.ByteArray;
-	
+
 	import org.sepy.fontreader.table.DirectoryEntry;
 	import org.sepy.fontreader.table.TTCHeader;
 	import org.sepy.fontreader.table.Table;
 
 	public class TFontCollection extends EventDispatcher
 	{
-		
 		private var _bytes:ByteArray;
-		private var _fonts:Array;			// Font[]
+		private var _fonts:Array;
 		private var _tables:Array = [];
 		private var _ttcHeader:TTCHeader;
 		private var _pathName:String;
@@ -100,7 +99,6 @@ package org.sepy.fontreader
     	    fc.read(file, pathName);
         	return fc;
 	    }
-		
 		
 		protected function read(file:URLStream, pathName:String = ""):void
 		{
